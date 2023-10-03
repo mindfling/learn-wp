@@ -1,12 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const CopyPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const mode = process.env.NODE_ENV || 'development';
+console.log('mode: ', mode);
 const devMode = mode === 'development';
+console.log('devMode: ', devMode);
 const target = devMode ? 'web' : 'browserslist';
+console.log('target: ', target);
 const devtool = devMode ? 'source-map' : undefined;
+console.log('devtool: ', devtool, '\n');
 
 module.exports = {
   mode,
@@ -31,9 +35,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
     }),
-    // new CopyPlugin({
-    //   patterns: [{ from: 'static', to: './' }],
-    // }),
+    new CopyPlugin({
+      patterns: [{ from: 'static', to: './' }],
+    }),
   ],
   module: {
     rules: [
